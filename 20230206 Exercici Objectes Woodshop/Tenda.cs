@@ -27,9 +27,45 @@ namespace _20230206_Exercici_Objectes_Woodshop
         { 
             Producte.Add(producte); 
         }
-        public string GetproductebyTipus(Producte producte, string opcio)
+        public void GetproductebyTipus(int opcio)
         {
-            foreach ()
+            if (opcio == 3)
+            {
+                foreach (Producte pro in Producte)
+                {
+                    if (pro is Vernis)
+                    {
+                        Console.WriteLine(pro.Codi);
+                        Console.WriteLine(pro.Descripcio);
+                    }
+                }
+            }
+            if(opcio==2)
+            {
+                foreach (Producte pro in Producte)
+                {
+                    if (pro is Article)
+
+                    {
+                        Console.WriteLine(pro.Codi);
+                        Console.WriteLine(pro.Descripcio);
+                    }
+
+                }
+            }
+            if (opcio == 1)
+            {
+                foreach (Producte pro in Producte)
+                {
+                    if (pro is Taulell)
+
+                    {
+                        Console.WriteLine(pro.Codi);
+                        Console.WriteLine(pro.Descripcio);
+                    }
+                }
+            }
+
         }
     }
 }

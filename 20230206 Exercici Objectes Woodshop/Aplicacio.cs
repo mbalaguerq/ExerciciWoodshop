@@ -9,9 +9,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 {
     internal class Aplicacio
     {
-
         WoodShops woodShops = new WoodShops();
-
 
         public void Inici()
         {
@@ -74,12 +72,12 @@ namespace _20230206_Exercici_Objectes_Woodshop
             barcelona.Poblacio = "Barcelona";
 
             Tenda girona = new Tenda();
-            barcelona.Direccio = "Carrer del Call";
-            barcelona.Poblacio = "Girona";
+            girona.Direccio = "Carrer del Call";
+            girona.Poblacio = "Girona";
 
             Tenda badalona = new Tenda();
-            barcelona.Direccio = "CC Magic SN";
-            barcelona.Poblacio = "Badalona";
+            badalona.Direccio = "CC Magic SN";
+            badalona.Poblacio = "Badalona";
 
             woodShops.AddTenda(barcelona);
             woodShops.AddTenda(girona);
@@ -164,8 +162,8 @@ namespace _20230206_Exercici_Objectes_Woodshop
         }
         void StockTenda(WoodShops woodShops)
         {
-            string opcio;
-            string tenda;
+            int opcio;
+            int tenda;
             //Listar los productos de una tienda
             //con la opción de seleccionar por los
             //tres tipos de producto: tablero, barniz o artículo.
@@ -174,19 +172,47 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.WriteLine("1- Barcelona");
             Console.WriteLine("2-Girona");
             Console.WriteLine("3-Badalona");
-            tenda = Console.ReadLine();
-
+            tenda = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Llistat de productes de tenda: ");
             Console.WriteLine("Selecciona els productes que desitges llistar: ");
             Console.WriteLine("1- Articles");
             Console.WriteLine("2-taulells");
             Console.WriteLine("3-Vernissos");
-            opcio= Console.ReadLine();
+            opcio = int.Parse(Console.ReadLine());
 
-            
+            Tenda AuxTenda;
 
+            foreach (Tenda t in woodShops.Tenda)
+            {
+                if (tenda.Equals(BARCELONA)) 
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Barcelona");
+                    AuxTenda.GetproductebyTipus(opcio);
+                }
+                if (tenda.Equals(GIRONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Girona");
+                    AuxTenda.GetproductebyTipus(opcio);
+                }
+                if (tenda.Equals(BADALONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Badalona");
+                    AuxTenda.GetproductebyTipus(opcio);
+                }
+
+            }
+            Console.WriteLine();
         }
+
+        void StockProducte(WoodShops woodShops)
+        {
+        }
+
+        const int BARCELONA = 1;
+        const int GIRONA = 2;
+        const int BADALONA= 3;
     }
 }
+
 

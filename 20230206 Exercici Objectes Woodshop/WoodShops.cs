@@ -13,18 +13,18 @@ namespace _20230206_Exercici_Objectes_Woodshop
     {
         private String nif;
         private String nombre;
-        private ArrayList tenda;
+        private ArrayList arraytenda;
         private ArrayList fabricant;
 
         public WoodShops()
         {
-            tenda= new ArrayList();
+            arraytenda= new ArrayList();
             fabricant= new ArrayList();
         }
 
         public string Nif { get { return nif; } set { nif = value; } }
         public string Nombre { get { return nombre; } set { nombre = value; } } 
-        public ArrayList Tenda { get { return tenda; } }
+        public ArrayList Tenda { get { return arraytenda; } }
         public ArrayList Fabricant { get { return fabricant; } }
 
         public void AddTenda(Tenda  tenda) 
@@ -40,6 +40,16 @@ namespace _20230206_Exercici_Objectes_Woodshop
             foreach(Fabricant fabricant in fabricant) 
             {
                 if (fabricant.Nombre.Equals(nom)) return fabricant;
+            }
+            return null;
+        }
+        public Tenda GetTendabyPoblacio(string nom)
+        {
+            foreach (Tenda t in arraytenda)
+            {
+                if (t.Poblacio.Equals(nom))
+                { return t; }
+                
             }
             return null;
         }
