@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -185,7 +186,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
             foreach (Tenda t in woodShops.Tenda)
             {
-                if (tenda.Equals(BARCELONA)) 
+                if (tenda.Equals(BARCELONA))
                 {
                     AuxTenda = woodShops.GetTendabyPoblacio("Barcelona");
                     AuxTenda.GetproductebyTipus(opcio);
@@ -204,14 +205,30 @@ namespace _20230206_Exercici_Objectes_Woodshop
             }
             Console.WriteLine();
         }
-
+        //Dado un código de producto, mostrar el stock de
+        //cada una de las tiendas en que exista el producto.
         void StockProducte(WoodShops woodShops)
         {
+            string codi;
+            Console.Write("Codi producte: ");
+            codi = Console.ReadLine();
+
+            foreach (Tenda tenda in woodShops.Tenda)
+            {
+                foreach (Producte pro in tenda.Producte)
+                {
+                    if (pro.Codi.Equals(codi))
+                    {
+                        Console.Write(tenda.Poblacio + " ");
+                        Console.WriteLine(pro.Stock);
+                    }
+                }
+            }
         }
 
         const int BARCELONA = 1;
         const int GIRONA = 2;
-        const int BADALONA= 3;
+        const int BADALONA = 3;
     }
 }
 

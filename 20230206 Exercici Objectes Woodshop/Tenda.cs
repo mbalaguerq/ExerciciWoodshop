@@ -23,9 +23,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
         public ArrayList Producte { get { return producte; } }
         //si no faig el set, em dona error
 
-        public void AddProducte(Producte producte) 
-        { 
-            Producte.Add(producte); 
+        public void AddProducte(Producte producte)
+        {
+            Producte.Add(producte);
         }
         public void GetproductebyTipus(int opcio)
         {
@@ -38,9 +38,11 @@ namespace _20230206_Exercici_Objectes_Woodshop
                         Console.WriteLine(pro.Codi);
                         Console.WriteLine(pro.Descripcio);
                     }
+
+
                 }
             }
-            if(opcio==2)
+            if (opcio == 2)
             {
                 foreach (Producte pro in Producte)
                 {
@@ -67,5 +69,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
             }
 
         }
+
     }
 }

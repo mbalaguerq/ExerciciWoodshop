@@ -53,6 +53,22 @@ namespace _20230206_Exercici_Objectes_Woodshop
             }
             return null;
         }
+        /*
+        public void GetstockbyTenda(string codi, ArrayList producte)
+        {
+            foreach(Tenda tenda in arraytenda)
+            {
+                foreach (Producte pro in producte)
+                {
+                    if( pro.Codi.Equals(codi)) 
+                    {
+                        Console.WriteLine(tenda.Poblacio);
+                        Console.WriteLine(pro.Stock);
+                    }
+                }
+            }
+        }
+        */
 
     }
 }
