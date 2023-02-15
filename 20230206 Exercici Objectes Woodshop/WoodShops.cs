@@ -15,22 +15,32 @@ namespace _20230206_Exercici_Objectes_Woodshop
         private String nombre;
         private ArrayList arraytenda;
         private ArrayList fabricant;
+        private ArrayList arrayClient;
 
         public WoodShops()
         {
             arraytenda= new ArrayList();
             fabricant= new ArrayList();
+            arrayClient= new ArrayList();
+
         }
 
         public string Nif { get { return nif; } set { nif = value; } }
         public string Nombre { get { return nombre; } set { nombre = value; } } 
         public ArrayList Tenda { get { return arraytenda; } }
         public ArrayList Fabricant { get { return fabricant; } }
+        public ArrayList ArrayClient { get { return arrayClient; } }
 
         public void AddTenda(Tenda  tenda) 
         { 
             Tenda.Add(tenda); 
         }
+
+        public void AddClient(Client client)
+        {
+            ArrayClient.Add(client);
+        }
+
         public void AddFabricant(Fabricant fabricant)
         {
             Fabricant.Add(fabricant);

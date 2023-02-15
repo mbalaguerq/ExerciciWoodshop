@@ -16,7 +16,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
         public override string ToString()
         {
-            return "nom" + nom + "\nnif" + nif   ;
+            return "nom\t" + nom + "\nnif\t" + nif + "\n";
         }
 
     }

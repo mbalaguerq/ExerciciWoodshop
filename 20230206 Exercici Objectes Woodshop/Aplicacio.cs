@@ -32,6 +32,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.WriteLine("1. Càrrega de productes a la tenda ");
             Console.WriteLine("2. Llistat de productes de botiga");
             Console.WriteLine("3. Stock de producte per tenda");
+            Console.WriteLine("4. Llistat de clients");
+            Console.WriteLine("5. Nou Tiquet");
+            Console.WriteLine("6. Búsqueda de tiquet");
         }
         public string DemanarOpcioMenu()
         {
@@ -45,7 +48,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
         }
 
         bool ExecutarMenu
-            
+
             (String opcio)
         {
             bool salir = false;
@@ -60,7 +63,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 case "3":
                     StockProducte(woodShops);
                     break;
-
+                case "4":
+                    LlistatClients(woodShops);
+                    break;
                 case "0":
                     salir = true;
                     break;
@@ -77,19 +82,46 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Client client2 = new Client();
             client2.Nif = "22222222B";
             client2.Nom = "Helena Nito Del Bosque";
-            
+
             Woodfriend woodfriend1 = new Woodfriend();
-            woodfriend1.NumSoci= 0000001;
+            woodfriend1.NumSoci = 0000001;
             woodfriend1.Nif = "46712725r";
             woodfriend1.Nom = "Marc Balaguer";
 
             Woodfriend woodfriend2 = new Woodfriend();
-            woodfriend2.NumSoci = 0000001;
+            woodfriend2.NumSoci = 0000002;
             woodfriend2.Nif = "46709705r";
             woodfriend2.Nom = "Eduardo Pardo";
 
+            Woodfriend woodfriend3 = new Woodfriend();
+            woodfriend3.NumSoci = 0000003;
+            woodfriend3.Nif = "38707707S";
+            woodfriend3.Nom = "Joserra Bolargo";
+
+            Professional professional1 = new Professional();
+            professional1.Descompte = 15;
+            professional1.Nif = "33333333C";
+            professional1.Nom = "Carmela Comes";
+
+            Professional professional2 = new Professional();
+            professional2.Descompte = 12;
+            professional2.Nif = "44444444D";
+            professional2.Nom = "Benito Puesto";
+
+            Professional professional3 = new Professional();
+            professional3.Descompte = 13;
+            professional3.Nif = "55555555E";
+            professional3.Nom = "Maria Monja";
 
 
+            woodShops.AddClient(professional1);
+            woodShops.AddClient(professional2);
+            woodShops.AddClient(professional3);
+            woodShops.AddClient(woodfriend1);
+            woodShops.AddClient(woodfriend2);
+            woodShops.AddClient(woodfriend3);
+            woodShops.AddClient(client1);
+            woodShops.AddClient(client2);
 
 
 
@@ -252,6 +284,36 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 }
             }
         }
+
+        //Mostrar listado de todos los clientes,
+        //indicando el tipo de cliente.
+        void LlistatClients(WoodShops woodShops)
+        {
+            Console.WriteLine();
+
+            foreach (Client client in woodShops.ArrayClient)
+            {
+                if (client is Professional)
+                {
+                    Console.WriteLine("Client Professional");
+                    Console.WriteLine(client.ToString() + "\n");
+                }
+                else if (client is Woodfriend)
+                {
+                    Console.WriteLine("Client Woodfriend");
+                    Console.WriteLine(client.ToString() + "\n");
+                }
+                else
+                {
+                    Console.WriteLine(client.ToString() + "\n");
+                }
+            }
+            Console.WriteLine();
+        }
+
+
+
+
 
         const int BARCELONA = 1;
         const int GIRONA = 2;

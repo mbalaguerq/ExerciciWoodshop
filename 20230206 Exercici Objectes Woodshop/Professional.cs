@@ -14,7 +14,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
         public override string ToString()
         {
-            return base.ToString() +  "descompte: " + descompte;
+            return base.ToString() +  "descompte: \t" + descompte;
         }
     }
 }

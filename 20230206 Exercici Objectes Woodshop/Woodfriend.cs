@@ -15,7 +15,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
         public override string ToString()
         {
-            return base.ToString() + "Número de soci: " + numSoci;
+            return base.ToString() + "Número de soci: \t" + numSoci;
         }
     }
 }
