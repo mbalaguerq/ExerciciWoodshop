@@ -44,7 +44,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
             return opcio;
         }
 
-        bool ExecutarMenu(String opcio)
+        bool ExecutarMenu
+            
+            (String opcio)
         {
             bool salir = false;
             switch (opcio)
@@ -67,6 +69,31 @@ namespace _20230206_Exercici_Objectes_Woodshop
         }
         void CarregaProductes(WoodShops woodShops)
         {
+            //creem els objectes client i els afegim al array clients
+            Client client1 = new Client();
+            client1.Nif = "11111111A";
+            client1.Nom = "Benito Camelas";
+
+            Client client2 = new Client();
+            client2.Nif = "22222222B";
+            client2.Nom = "Helena Nito Del Bosque";
+            
+            Woodfriend woodfriend1 = new Woodfriend();
+            woodfriend1.NumSoci= 0000001;
+            woodfriend1.Nif = "46712725r";
+            woodfriend1.Nom = "Marc Balaguer";
+
+            Woodfriend woodfriend2 = new Woodfriend();
+            woodfriend2.NumSoci = 0000001;
+            woodfriend2.Nif = "46709705r";
+            woodfriend2.Nom = "Eduardo Pardo";
+
+
+
+
+
+
+
             //Creem obj tenda i els afegim a l'array Woodshops
             Tenda barcelona = new Tenda();
             barcelona.Direccio = "Sagrada Familia 23";
@@ -182,7 +209,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.WriteLine("3-Vernissos");
             opcio = int.Parse(Console.ReadLine());
 
-            Tenda AuxTenda;
+            Tenda AuxTenda;//creem un objecte al que assignar-li la botiga que ens retorna el mètode
 
             foreach (Tenda t in woodShops.Tenda)
             {

@@ -18,6 +18,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
         private int ample;
         private int llarg;
         Taulells tipus_Taulell;
+        //millor fer TipusTaulell tipustaulell
 
         public int Ample { get => ample;set => ample = value; }
         public int LLarg { get => llarg; set => llarg = value; }

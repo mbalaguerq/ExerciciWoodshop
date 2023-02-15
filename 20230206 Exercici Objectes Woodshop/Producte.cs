@@ -23,7 +23,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
         public override string ToString()
         {
-            return "codi" + codi + "descripció" + descripcio + "Preu" + pvp + "Stock" + stock + "Fabricant" + Fabricant;
+            return "codi" + codi + "descripció" + descripcio + "Preu" + pvp + "Stock" + stock + "Fabricant" + Fabricant.Nombre;
         }
     }
 }

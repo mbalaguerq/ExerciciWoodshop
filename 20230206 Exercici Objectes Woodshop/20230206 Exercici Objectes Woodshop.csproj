@@ -45,13 +45,18 @@
   <ItemGroup>
     <Compile Include="Aplicacio.cs" />
     <Compile Include="Article.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Fabricant.cs" />
+    <Compile Include="LineaTiquet.cs" />
     <Compile Include="Producte.cs" />
+    <Compile Include="Professional.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Taulell.cs" />
     <Compile Include="Tenda.cs" />
+    <Compile Include="tiquetVenta.cs" />
     <Compile Include="Vernis.cs" />
+    <Compile Include="Woodfriend.cs" />
     <Compile Include="WoodShops.cs" />
   </ItemGroup>
   <ItemGroup>

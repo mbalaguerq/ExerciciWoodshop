@@ -21,7 +21,11 @@ namespace _20230206_Exercici_Objectes_Woodshop
         private Verniss tipus_vernis;
 
         public int Ml { get => ml; set => ml = value; }
-        public Verniss Tipus_Vernis { get => tipus_vernis; set => tipus_vernis = value; } 
-            
+        public Verniss Tipus_Vernis { get => tipus_vernis; set => tipus_vernis = value; }
+
+        public override string ToString()
+        {
+            return base.ToString() + "color"  ;
+        }
     }
 }

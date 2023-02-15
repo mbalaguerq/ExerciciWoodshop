@@ -12,6 +12,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
         private String direccio;
         private String poblacio;
         private ArrayList producte;
+        private ArrayList arrayTiquetventa;
 
         public Tenda()
         {
@@ -21,7 +22,14 @@ namespace _20230206_Exercici_Objectes_Woodshop
         public string Direccio { get { return direccio; } set { direccio = value; } }
         public String Poblacio { get { return poblacio; } set { poblacio = value; } }
         public ArrayList Producte { get { return producte; } }
-        //si no faig el set, em dona error
+        public ArrayList ArrayTiquetventa { get { return arrayTiquetventa; } }
+
+        
+
+        public void AddTiquet(tiquetVenta tiquetVenta)
+        {
+            Producte.Add(tiquetVenta);
+        }
 
         public void AddProducte(Producte producte)
         {
@@ -38,8 +46,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
                         Console.WriteLine(pro.Codi);
                         Console.WriteLine(pro.Descripcio);
                     }
-
-
                 }
             }
             if (opcio == 2)
@@ -47,12 +53,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 foreach (Producte pro in Producte)
                 {
                     if (pro is Article)
-
                     {
                         Console.WriteLine(pro.Codi);
                         Console.WriteLine(pro.Descripcio);
                     }
-
                 }
             }
             if (opcio == 1)
@@ -67,7 +71,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
                     }
                 }
             }
-
         }
 
     }

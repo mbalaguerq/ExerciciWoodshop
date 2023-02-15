@@ -22,5 +22,8 @@ namespace _20230206_Exercici_Objectes_Woodshop
     {
         Articles tipus_Article;
         public Articles Tipus_Article { get  => tipus_Article; set => tipus_Article = value; }
+
+        //es millor fer:
+        //TipusArticle tipusarticle
     }
 }
