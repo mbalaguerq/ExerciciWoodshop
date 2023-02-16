@@ -24,11 +24,11 @@ namespace _20230206_Exercici_Objectes_Woodshop
         public ArrayList Producte { get { return producte; } }
         public ArrayList ArrayTiquetventa { get { return arrayTiquetventa; } }
 
-        
+
 
         public void AddTiquet(tiquetVenta tiquetVenta)
         {
-            Producte.Add(tiquetVenta);
+            arrayTiquetventa.Add(tiquetVenta);
         }
 
         public void AddProducte(Producte producte)
@@ -71,7 +71,25 @@ namespace _20230206_Exercici_Objectes_Woodshop
                     }
                 }
             }
-        }
 
+        }
+        public Producte GetproductebyCodi(string codi)
+        {
+            foreach (Producte pro in Producte)
+            {
+                if (codi == pro.Codi)
+                {
+                    return pro;
+                    /*Console.WriteLine(pro.Codi);
+                    Console.WriteLine(pro.Descripcio);
+                    Console.WriteLine(pro.Pvp);
+                    Console.WriteLine(pro.Stock);
+                    Console.WriteLine(pro.Fabricant);*/
+
+                }
+            }
+            return null;
+            
+        }
     }
 }

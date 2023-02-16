@@ -63,6 +63,17 @@ namespace _20230206_Exercici_Objectes_Woodshop
             }
             return null;
         }
+        public Client GetClientByNif(string nif)
+        {
+            foreach (Client client in arrayClient) 
+            {
+                if (client.Nif.Equals(nif))
+                {
+                    return client;
+                }
+            }
+            return null;
+        }
 
     }
 }

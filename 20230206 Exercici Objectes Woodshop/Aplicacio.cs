@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace _20230206_Exercici_Objectes_Woodshop
 {
@@ -26,7 +27,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
             } while (!salir);
             Console.WriteLine();
         }
-
         public void mostrarMenu()
         {
             Console.WriteLine("1. Càrrega de productes a la tenda ");
@@ -66,6 +66,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 case "4":
                     LlistatClients(woodShops);
                     break;
+                case "5":
+                    NouTiquet(woodShops);
+                    break;
+
                 case "0":
                     salir = true;
                     break;
@@ -311,10 +315,91 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.WriteLine();
         }
 
+        void NouTiquet(WoodShops woodShops)
+        {
+            int tenda, quantitat;
+            Tenda AuxTenda = null;
+            Producte pro;
+            var randomNumber = new Random().Next(0, 100);
+            bool sortir = false;
+            string codi, no;
+
+            Console.WriteLine("Selecciona la tenda: ");
+            Console.WriteLine("1- Barcelona");
+            Console.WriteLine("2-Girona");
+            Console.WriteLine("3-Badalona");
+            tenda = int.Parse(Console.ReadLine());
+
+            foreach (Tenda t in woodShops.Tenda)//busquem tenda
+            {
+                if (tenda.Equals(BARCELONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Barcelona");
+                }
+                if (tenda.Equals(GIRONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Girona");
+                }
+                if (tenda.Equals(BADALONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Badalona");
+                }
+            }
+            //creo nou objecte tiquet venta
+            tiquetVenta tiquetVenta1 = new tiquetVenta();
+
+            Console.Write("Tiquet nº: " + randomNumber);
+            tiquetVenta1.Numero = randomNumber;  
+            
+            Console.WriteLine("Introdueix la data dd/mm/aaaa");
+            tiquetVenta1.Data = DateTime.Parse(Console.ReadLine());
+
+
+            do//while per afegir tantes lineas de tiquet com es vulgi
+            {
+                LineaTiquet auxlinea = new LineaTiquet();
+
+                Console.WriteLine("Afegir article: ");
+                codi = Console.ReadLine();
+                pro = AuxTenda.GetproductebyCodi(codi);
+                Console.WriteLine(pro.Codi);
+                Console.WriteLine(pro.Stock);
+                Console.WriteLine(pro.Pvp);
+                Console.WriteLine();
+                Console.Write("Quantitat:");
+                quantitat = int.Parse(Console.ReadLine());
+
+                if (pro.Stock < quantitat)
+                {
+                    Console.WriteLine("No hi ha suficient stock de l'article seleccionat");
+                }
+                auxlinea.Quantitat = quantitat;
+                auxlinea.Producte = pro;
+                auxlinea.Preu = pro.Pvp;
+
+                Console.Write("Vols afegir un altre article? S/N");
+                no = Console.ReadLine();
+                no.ToLower();
+                if (no.Equals("n"))
+                {
+                    sortir = true;
+                }
+            } while (!sortir);
+
+
+
+            //Para crear cada linea de tiquet independiente, creamos un método que cree una linea
+            //nueva con un objeto aux 
 
 
 
 
+
+
+
+
+
+        }
         const int BARCELONA = 1;
         const int GIRONA = 2;
         const int BADALONA = 3;
