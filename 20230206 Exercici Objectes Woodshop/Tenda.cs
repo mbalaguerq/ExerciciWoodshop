@@ -80,12 +80,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 if (codi == pro.Codi)
                 {
                     return pro;
-                    /*Console.WriteLine(pro.Codi);
-                    Console.WriteLine(pro.Descripcio);
-                    Console.WriteLine(pro.Pvp);
-                    Console.WriteLine(pro.Stock);
-                    Console.WriteLine(pro.Fabricant);*/
-
+                   
                 }
             }
             return null;
