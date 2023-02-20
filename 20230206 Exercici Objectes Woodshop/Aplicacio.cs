@@ -320,6 +320,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
         void NouTiquet(WoodShops woodShops)
         {
 
+        //Añadir ticket de venta en la tienda, al añadir el ticket de venta, además se debe mostrar por pantalla
+        //el ticket completo, número, fecha, cliente en caso de ser un cliente registrado, todo el detalle del ticket
+        //y el total del importe del ticket teniendo en cuenta el posible descuento en caso de cliente profesional.
+
             Tenda AuxTenda = null;
             Client AuxClient = null;
             Producte pro = null;
@@ -364,16 +368,24 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 Console.WriteLine("Pvp " + pro.Pvp + " Euros");
                 Console.WriteLine();
 
-                //Aqi posar un do While fins que quantitat sigui correcte
-                Console.Write("Quantitat: ");
-                quantitat = int.Parse(Console.ReadLine());
 
-                if (pro.Stock < quantitat)
+
+                try
                 {
-                    Console.WriteLine("No hi ha suficient stock de l'article seleccionat");
+                    Console.Write("Quantitat: ");
+                    quantitat = int.Parse(Console.ReadLine());
+
+                    if (pro.Stock < quantitat)
+                    {
+                        Console.WriteLine("No hi ha suficient stock de l'article seleccionat");
+                    }
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Inserta una quantitat inferior a l'stock actual " + ex.Message);
                 }
 
-                Auxlinea.Quantitat = quantitat;
+                Auxlinea.Quantitat = quantitat; //S'HA D'ARREGLAR AIXÒ
                 Auxlinea.Producte = pro;
                 Auxlinea.Preu = pro.Pvp;
                 //AQUI DONA ERROR
@@ -388,7 +400,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 }
             } while (!sortir);
 
-            Console.WriteLine("Tiquet nº: " + randomNumber);
+            Console.WriteLine("Tiquet nº: " + randomNumber);//NO PUC FER UN ++ A UNA CONSTANT
             tiquetVenta1.Numero = randomNumber;
 
             Console.Write("Introdueix la data dd/mm/aaaa: " );
