@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace _20230206_Exercici_Objectes_Woodshop
 {
-    internal class tiquetVenta
+    internal class TiquetVenta
     {
         private int numero;
         private DateTime data;

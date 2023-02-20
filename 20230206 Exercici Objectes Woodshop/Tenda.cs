@@ -26,7 +26,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
 
 
-        public void AddTiquet(tiquetVenta tiquetVenta)
+        public void AddTiquet(TiquetVenta tiquetVenta)
         {
             arrayTiquetventa.Add(tiquetVenta);
         }

@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Taulell.cs" />
     <Compile Include="Tenda.cs" />
-    <Compile Include="tiquetVenta.cs" />
+    <Compile Include="TiquetVenta.cs" />
     <Compile Include="Vernis.cs" />
     <Compile Include="Woodfriend.cs" />
     <Compile Include="WoodShops.cs" />
