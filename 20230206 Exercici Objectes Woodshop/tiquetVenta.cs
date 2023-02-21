@@ -34,5 +34,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
         {
             return "Client" + client.Nif +  "\nN.Tiquet: " + numero + "\nData: " + data;
         }
+
+        
+
+        
     }
 }

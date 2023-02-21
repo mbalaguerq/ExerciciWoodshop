@@ -81,11 +81,22 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 if (codi == pro.Codi)
                 {
                     return pro;
-                   
+
                 }
             }
             return null;
-            
+        }
+        public TiquetVenta GetTiquetbyCodi(int codi)
+        {
+            foreach (TiquetVenta tic in arrayTiquetventa)
+            {
+                if (codi == tic.Numero)
+                {
+                    return tic;
+
+                }
+            }
+            return null;
         }
     }
 }
