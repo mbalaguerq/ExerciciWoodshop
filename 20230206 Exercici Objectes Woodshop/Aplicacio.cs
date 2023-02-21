@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,7 +12,17 @@ using System.Xml;
 namespace _20230206_Exercici_Objectes_Woodshop
 {
     internal class Aplicacio
+
     {
+        const int BARCELONA = 1;
+        const int GIRONA = 2;
+        const int BADALONA = 3;
+        const int DESCOMPTEPRO = 10;
+
+        int nTiquet = 1;
+        int nSoci = 4;
+        DateTime date = DateTime.Now.Date;
+
         WoodShops woodShops = new WoodShops();
 
         public void Inici()
@@ -49,7 +60,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
         }
 
         bool ExecutarMenu
-
             (String opcio)
         {
             bool salir = false;
@@ -79,6 +89,8 @@ namespace _20230206_Exercici_Objectes_Woodshop
         }
         void CarregaProductes(WoodShops woodShops)
         {
+            //Console.WriteLine(date.ToShortDateString());
+
             //creem els objectes client i els afegim al array clients
             Client client1 = new Client();
             client1.Nif = "11111111A";
@@ -320,20 +332,21 @@ namespace _20230206_Exercici_Objectes_Woodshop
         void NouTiquet(WoodShops woodShops)
         {
 
-        //Añadir ticket de venta en la tienda, al añadir el ticket de venta, además se debe mostrar por pantalla
-        //el ticket completo, número, fecha, cliente en caso de ser un cliente registrado, todo el detalle del ticket
-        //y el total del importe del ticket teniendo en cuenta el posible descuento en caso de cliente profesional.
+            //Añadir ticket de venta en la tienda, al añadir el ticket de venta, además se debe mostrar por pantalla
+            //el ticket completo, número, fecha, cliente en caso de ser un cliente registrado, todo el detalle del ticket
+            //y el total del importe del ticket teniendo en cuenta el posible descuento en caso de cliente profesional.
 
             Tenda AuxTenda = null;
-            Client AuxClient = null;
+            Client auxClient = null;
             Producte pro = null;
             TiquetVenta tiquetVenta1 = new TiquetVenta();
-            LineaTiquet Auxlinea = new LineaTiquet();
+            LineaTiquet auxlinea = new LineaTiquet();
+            bool stockSuficient = false;
 
             int tenda, quantitat;
             var randomNumber = new Random().Next(0, 100);
             bool sortir = false;
-            string codi, no, nif, si;
+            string codi, no, nif, si, nom;
 
 
 
@@ -368,9 +381,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 Console.WriteLine("Pvp " + pro.Pvp + " Euros");
                 Console.WriteLine();
 
-
-
-                try
+                do
                 {
                     Console.Write("Quantitat: ");
                     quantitat = int.Parse(Console.ReadLine());
@@ -378,18 +389,18 @@ namespace _20230206_Exercici_Objectes_Woodshop
                     if (pro.Stock < quantitat)
                     {
                         Console.WriteLine("No hi ha suficient stock de l'article seleccionat");
+                        Console.WriteLine("Inserta una quantitat inferior a l'stock actual ");
                     }
-                }
-                catch (FormatException ex)
-                {
-                    Console.WriteLine("Inserta una quantitat inferior a l'stock actual " + ex.Message);
-                }
+                    else
+                    {
+                        stockSuficient = true;
+                    }
+                } while (!stockSuficient);
 
-                Auxlinea.Quantitat = quantitat; //S'HA D'ARREGLAR AIXÒ
-                Auxlinea.Producte = pro;
-                Auxlinea.Preu = pro.Pvp;
-                //AQUI DONA ERROR
-                //tiquetVenta1.AddLineatiquet(Auxlinea);//afegim linea al tiquet
+                auxlinea.Quantitat = quantitat;
+                auxlinea.Producte = pro;
+                auxlinea.Preu = pro.Pvp;
+                tiquetVenta1.AddLineatiquet(auxlinea);//afegim linea al tiquet
 
                 Console.Write("Vols afegir un altre article? S/N: ");
                 no = Console.ReadLine();
@@ -400,116 +411,148 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 }
             } while (!sortir);
 
-            Console.WriteLine("Tiquet nº: " + randomNumber);//NO PUC FER UN ++ A UNA CONSTANT
-            tiquetVenta1.Numero = randomNumber;
+            Console.WriteLine("Tiquet nº: " + nTiquet++);
+            tiquetVenta1.Numero = nTiquet++;
 
-            Console.Write("Introdueix la data dd/mm/aaaa: " );
-            tiquetVenta1.Data = DateTime.Parse(Console.ReadLine());
-
+            Console.WriteLine(date.ToShortDateString());
+            tiquetVenta1.Data = date;
 
             Console.Write("Dni client :");
             nif = Console.ReadLine();
-            AuxClient = woodShops.GetClientByNif(nif);
+            nif.ToLower();
+            auxClient = woodShops.GetClientByNif(nif);
 
-            //DONA ERROR AQUI
-            if (AuxClient == null)
+            if (auxClient == null)
             {
-                Console.WriteLine("Nou Client");
-                Console.Write("Introdueixi el Nom i Cognoms: ");
-                AuxClient.Nif = nif;
-                AuxClient.Nom = Console.ReadLine();
-                Console.Write("És client Professional S/N: ");
-                no = Console.ReadLine();
-                no.ToLower();
-                if (no.Equals("n"))//No és professional
+                int var;
+
+                do
                 {
-                    Console.WriteLine("Vol gaudir dels descomptes de client WoodFriend?: ");
-                    si= Console.ReadLine();
-                    si.ToLower();
-                    if(si.Equals("s"))//Vol ser woodfriend
+                    Console.WriteLine("Nou Client");
+                    Console.WriteLine("Seleccioni una opció: ");
+                    Console.WriteLine("1. Nou Client Professional");
+                    Console.WriteLine("2. Nou Client Woodfriend");
+                    Console.WriteLine("3. No sóc professional i no vull avantatges Woodfriend");
+                    var = int.Parse(Console.ReadLine());
+
+
+                    switch (var)
                     {
-                        //SOCI S'HA DE MODIFICAR 
-                        (AuxClient as Woodfriend).NumSoci= SOCI;
+                        case 1:
+                            Console.WriteLine();
+                            Console.WriteLine("1. Nou Client Professional");
+                            Console.Write("Introdueixi el Nom i Cognoms: ");
+                            nom = Console.ReadLine();
+
+                            Professional auxpro = new Professional();
+                            auxpro.Nif = nif;
+                            auxpro.Nom = nom;
+                            auxpro.Descompte = DESCOMPTEPRO;
+                            woodShops.AddClient(auxpro);
+
+                            break;
+                        case 2:
+                            Console.WriteLine();
+                            Console.WriteLine("2. Nou Client Woodfriend");
+                            Console.Write("Introdueixi el Nom i Cognoms: ");
+                            nom = Console.ReadLine();
+                            Console.WriteLine("Número de soci: " + nSoci++);
+
+                            Woodfriend auxWoodFriend = new Woodfriend();
+                            auxWoodFriend.Nif = nif;
+                            auxWoodFriend.Nom = nom;
+                            auxWoodFriend.NumSoci = nSoci++;
+                            woodShops.AddClient(auxWoodFriend);
+
+                            break;
+                        case 3:
+                            Console.WriteLine();
+                            Console.WriteLine("3. Nou client: ");
+                            Console.Write("Introdueixi el Nom i Cognoms: ");
+                            nom = Console.ReadLine();
+
+                            auxClient = new Client();
+                            auxClient.Nif = nif;
+                            auxClient.Nom = nom;
+                            woodShops.AddClient(auxClient);
+                            break;
+                        case 0:
+                            Console.WriteLine("Program Exit  ");
+                            break;
+                        default:
+                            Console.WriteLine("Opción incorrecta");
+                            break;
                     }
-
-                }
-                else
-                {
-                    (AuxClient as Professional).Descompte = DESCOMPTEPRO;
-                }
-                woodShops.AddClient(AuxClient);
-
-                //Aquí, si no està registrat, s'ha de registrar
-
-
-                tiquetVenta1.Client = AuxClient;
-
-                AuxTenda.AddTiquet(tiquetVenta1);//afegim tiquet venta a la tenda
+                } while (var != 0);
+                Console.WriteLine("Nou client creat satisfactòriament");
+                
 
 
                 //Comencem a mostrar tiquet per consola
                 Console.WriteLine();
                 //Dades Tenda
-                Console.Write(AuxTenda.Poblacio);
-                Console.Write(AuxTenda.Direccio);
+                Console.WriteLine(AuxTenda.Poblacio);
+                Console.WriteLine(AuxTenda.Direccio);
                 Console.WriteLine();
 
                 //Dades client
-
-                if (AuxClient.Nif.Equals(nif))
+            }
+            else
+            {
+                if (auxClient.Nif.Equals(nif))
                 {
-                    if (AuxClient is Woodfriend)
+                    if (auxClient is Woodfriend)
                     {
-                        Console.WriteLine("Sr/Sra: " + AuxClient.Nom);
-                        Console.WriteLine("Soci num: " + (AuxClient as Woodfriend).NumSoci);//casting
+                        Console.WriteLine("Sr/Sra: " + auxClient.Nom);
+                        Console.WriteLine("Soci num: " + (auxClient as Woodfriend).NumSoci);//casting
                     }
-                    else if (AuxClient is Professional)
+                    else if (auxClient is Professional)
                     {
-                        Console.WriteLine("Sr/Sra: " + AuxClient.Nom);
-                        Console.WriteLine("Dcte. Professional: " + (AuxClient as Professional).Descompte);
+                        Console.WriteLine("Sr/Sra: " + auxClient.Nom);
+                        Console.WriteLine("Dcte. Professional: " + (auxClient as Professional).Descompte);
                     }
                     else
                     {
-                        Console.WriteLine("Sr/Sra: " + AuxClient.Nom);
+                        Console.WriteLine("Sr/Sra: " + auxClient.Nom);
                     }
                     //Dades Tiquet i detall tiquet
                     Console.WriteLine();
                     Console.WriteLine("Número de tiquet :" + tiquetVenta1.Numero);
-                    Console.WriteLine("Data: " + tiquetVenta1.Data);
+                    Console.WriteLine("Data: " + date.ToShortDateString());
                     Console.WriteLine();
                     Console.WriteLine("Detall de productes: ");
                     Console.WriteLine();
-                    Console.WriteLine(Auxlinea.Producte);
-                    Console.WriteLine(Auxlinea.Preu);
-                    Console.WriteLine(Auxlinea.Quantitat);
+                    Console.WriteLine("Producte: " + auxlinea.Producte);
+                    Console.WriteLine("Quantitat: " + auxlinea.Quantitat);
 
                     //Sumatori preu final
-                    int val1 = Auxlinea.Quantitat;
+                    int val1 = auxlinea.Quantitat;
                     float val2 = (float)val1;
-                    float pvpTotal = (Auxlinea.Preu * val1);
-                    float dtePro = (AuxClient as Professional).Descompte;
-                    float pvpFinal = (dtePro * 100) / dtePro;
+                    float pvpTotal = (auxlinea.Preu * val1);
+                    float dtePro = 0;
+                    float pvpFinal = pvpTotal;
 
-                    if (AuxClient is Professional)
+                    if (auxClient is Professional)
                     {
+                        dtePro = (auxClient as Professional).Descompte;
+                        pvpFinal = (dtePro * 100) / pvpTotal;
                         Console.WriteLine("Pvp total :" + pvpTotal);
                         Console.WriteLine("Descompte Pro:" + dtePro);
                         Console.WriteLine("Pvp final: " + pvpFinal);
                         Console.WriteLine();
+
                     }
                     else
                     {
                         Console.WriteLine("Pvp total :" + pvpTotal);
+                        Console.WriteLine();
+                        Console.WriteLine();
                     }
                 }
             }
-            
+
         }
-        const int BARCELONA = 1;
-        const int GIRONA = 2;
-        const int BADALONA = 3;
-        const int DESCOMPTEPRO = 10;
-        const int SOCI = 4;
+
     }
 }
 

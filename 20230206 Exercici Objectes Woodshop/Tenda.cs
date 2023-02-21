@@ -17,6 +17,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
         public Tenda()
         {
             producte = new ArrayList();
+            arrayTiquetventa = new ArrayList();
         }
 
         public string Direccio { get { return direccio; } set { direccio = value; } }

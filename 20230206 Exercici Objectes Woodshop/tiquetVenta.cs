@@ -11,6 +11,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
 {
     internal class TiquetVenta
     {
+        public TiquetVenta() {
+
+            arrayLineatiquets = new ArrayList();
+        }
         private int numero;
         private DateTime data;
         private ArrayList arrayLineatiquets;
