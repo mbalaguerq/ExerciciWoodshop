@@ -343,10 +343,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
             LineaTiquet auxlinea = new LineaTiquet();
             bool stockSuficient = false;
 
-            int tenda, quantitat, tic;
-            var randomNumber = new Random().Next(0, 100);
+            int tenda, quantitat;
             bool sortir = false;
-            string codi, no, nif, si, nom;
+            string codi, no, nif,  nom;
 
 
 
@@ -411,12 +410,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 }
             } while (!sortir);
 
-            Console.WriteLine("Tiquet nº: " + nTiquet++);
-            tiquetVenta1.Numero = nTiquet++;
-
-            Console.WriteLine(date.ToShortDateString());
-            tiquetVenta1.Data = date;
-
+            Console.WriteLine();
             Console.Write("Dni client :");
             nif = Console.ReadLine();
             nif.ToLower();
@@ -492,8 +486,9 @@ namespace _20230206_Exercici_Objectes_Woodshop
                             break;
                     }
                 } while (var != 0);
-                Console.WriteLine("Nou client creat satisfactòriament");
+                Console.WriteLine();
 
+                tiquetVenta1.Numero = nTiquet++;
                 AuxTenda.AddTiquet(tiquetVenta1);//Afegim tiquet a l'arrayList de tiquets de tenda.      
             }
             else //Dades client
@@ -513,10 +508,11 @@ namespace _20230206_Exercici_Objectes_Woodshop
                     Console.WriteLine("Sr/Sra: " + auxClient.Nom);
                 }
             }
+
             //Comencem a mostrar tiquet per consola
             Console.WriteLine();
             //Dades Tenda
-            Console.WriteLine(AuxTenda.Poblacio);
+            Console.WriteLine("WoodShops " + AuxTenda.Poblacio);
             Console.WriteLine(AuxTenda.Direccio);
             Console.WriteLine();
 
@@ -526,7 +522,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.WriteLine("Data: " + date.ToShortDateString());
             Console.WriteLine();
             Console.WriteLine("Detall de productes: ");
-
+            Console.WriteLine();
 
             float pvpTotal = 0;
 
@@ -534,44 +530,23 @@ namespace _20230206_Exercici_Objectes_Woodshop
             {
                 float pvplinea = 0;
                 
-
-
                 Console.WriteLine(linea.Producte.Descripcio);
-                Console.WriteLine(linea.Quantitat);
-                Console.WriteLine(linea.Producte.Pvp);
-                Console.WriteLine();
+                Console.WriteLine("Preu: " + linea.Producte.Pvp);
+                Console.WriteLine("Unitats: " + linea.Quantitat);
+                                
                 pvplinea = linea.Producte.Pvp * linea.Quantitat;
+                Console.WriteLine("Preu Total: " + linea.Producte.Pvp  + " C/U " + "x"  + pvplinea + " Euros= " + pvplinea + " Euros" );
+                Console.WriteLine();
 
-                pvpTotal+= pvplinea;
+                pvpTotal += pvplinea;
             }
-
+            Console.WriteLine("");
 
             //Sumatori preu final
                         
             float dtePro = 0;
+            float pvpFinal = 0;
    
-            if (auxClient is Professional)
-            {
-                dtePro = (auxClient as Professional).Descompte;
-                pvpTotal = (dtePro * 100) / pvpTotal;
-                Console.WriteLine("Pvp total :" + pvpTotal);
-                Console.WriteLine("Descompte Pro:" + dtePro);
-                Console.WriteLine("Pvp final: " + pvpTotal);
-                Console.WriteLine();
-            }
-
-
-
-            /*Console.WriteLine();
-            Console.WriteLine("Producte: " + auxlinea.Producte);
-            Console.WriteLine("Quantitat: " + auxlinea.Quantitat);
-            //Sumatori preu final
-            int val1 = auxlinea.Quantitat;
-            float val2 = (float)val1;
-            float pvpTotal = (auxlinea.Preu * val1);
-            float dtePro = 0;
-            float pvpFinal = pvpTotal;
-
             if (auxClient is Professional)
             {
                 dtePro = (auxClient as Professional).Descompte;
@@ -583,10 +558,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
             }
             else
             {
-                Console.WriteLine("Pvp total :" + pvpTotal);
+                Console.WriteLine("Pvp total :" + pvpTotal + " Euros");
                 Console.WriteLine();
                 Console.WriteLine();
-            }*/
+            }
         }
     }
 }
