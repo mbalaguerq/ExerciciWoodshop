@@ -32,7 +32,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
 
         public override string ToString()
         {
-            return "Client" + client.Nif +  "\nN.Tiquet: " + numero + "\nData: " + data;
+            return "Client" + client.Nom + "\nN.Tiquet: " + numero + "\nData: " + data + "Detall: " +  "\n" +  ArrayLineatiquets;
         }
 
         

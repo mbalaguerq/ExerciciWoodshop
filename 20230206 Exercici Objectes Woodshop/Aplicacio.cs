@@ -80,6 +80,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 case "5":
                     NouTiquet(woodShops);
                     break;
+                    case "6":
+                    BuscaTiquet(woodShops);
+                    break;
+
 
                 case "0":
                     salir = true;
@@ -561,6 +565,54 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 Console.WriteLine("Pvp total :" + pvpTotal + " Euros");
                 Console.WriteLine();
                 Console.WriteLine();
+            }
+        }
+
+        void BuscaTiquet(WoodShops woodShops)
+        {
+            //Mostrar un listado de resumen de tickets en la tienda, se debe filtrar entre una fecha de inicio y
+            //una fecha fin y se debe mostrar, el número, fecha, cliente en caso de ser cliente registrado, el descuento
+            //aplicado si procede y el total del importe del ticket.
+
+            DateTime dataInici;
+            DateTime dataFinal;
+            int tenda;
+            Tenda AuxTenda = null;
+
+
+            Console.WriteLine();
+            Console.WriteLine("Selecciona la tenda: ");
+            Console.WriteLine("1- Barcelona");
+            Console.WriteLine("2-Girona");
+            Console.WriteLine("3-Badalona");
+            tenda = int.Parse(Console.ReadLine());
+
+            foreach (Tenda t in woodShops.Tenda)//busquem tenda
+            {
+                if (tenda.Equals(BARCELONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Barcelona");
+                }
+                if (tenda.Equals(GIRONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Girona");
+                }
+                if (tenda.Equals(BADALONA))
+                {
+                    AuxTenda = woodShops.GetTendabyPoblacio("Badalona");
+                }
+            }
+            Console.Write("Introdueix data d'inici: dd/mm//aaaa ");
+            dataInici=DateTime.Parse(Console.ReadLine());
+            Console.Write("Introdueix data final: dd/mm//aaaa ");
+            dataFinal = DateTime.Parse(Console.ReadLine());
+
+
+
+
+            foreach (TiquetVenta ticket in AuxTenda.ArrayTiquetventa)
+            {
+
             }
         }
     }

@@ -19,13 +19,10 @@ namespace _20230206_Exercici_Objectes_Woodshop
             producte = new ArrayList();
             arrayTiquetventa = new ArrayList();
         }
-
         public string Direccio { get { return direccio; } set { direccio = value; } }
         public String Poblacio { get { return poblacio; } set { poblacio = value; } }
         public ArrayList Producte { get { return producte; } }
         public ArrayList ArrayTiquetventa { get { return arrayTiquetventa; } }
-
-
 
         public void AddTiquet(TiquetVenta tiquetVenta)
         {
