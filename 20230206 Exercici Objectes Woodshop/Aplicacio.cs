@@ -58,7 +58,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
             } while (!"0123456".Contains(opcio));
             return opcio;
         }
-
         bool ExecutarMenu
             (String opcio)
         {
@@ -240,6 +239,99 @@ namespace _20230206_Exercici_Objectes_Woodshop
             badalona.AddProducte(article1);
             badalona.AddProducte(taulell1);
             badalona.AddProducte(taulell2);
+
+            LineaTiquet linea1= new LineaTiquet();
+            linea1.Producte=vernis1;
+            linea1.Preu = vernis1.Pvp;
+            linea1.Quantitat = 2;
+
+            LineaTiquet linea2 = new LineaTiquet();
+            linea2.Producte = article1;
+            linea2.Preu = article1.Pvp;
+            linea2.Quantitat = 4;
+
+            LineaTiquet linea3 = new LineaTiquet();
+            linea3.Producte = vernis1;
+            linea3.Preu = vernis1.Pvp;
+            linea3.Quantitat = 6;
+
+            LineaTiquet linea4 = new LineaTiquet();
+            linea4.Producte = taulell1;
+            linea4.Preu = taulell1.Pvp;
+            linea4.Quantitat = 1;
+
+            LineaTiquet linea5 = new LineaTiquet();
+            linea5.Producte = taulell2;
+            linea5.Preu = taulell2.Pvp;
+            linea5.Quantitat = 2;
+
+            LineaTiquet linea6 = new LineaTiquet();
+            linea6.Producte = taulell1;
+            linea6.Preu = taulell1.Pvp;
+            linea6.Quantitat = 1;
+
+            LineaTiquet linea7 = new LineaTiquet();
+            linea7.Producte = article1;
+            linea7.Preu = article1.Pvp;
+            linea7.Quantitat = 12;
+
+            LineaTiquet linea8 = new LineaTiquet();
+            linea8.Producte = taulell2;
+            linea8.Preu = taulell2.Pvp;
+            linea8.Quantitat = 3;
+
+            
+
+            TiquetVenta tiquet1 = new TiquetVenta();
+            tiquet1.Numero = 0001;
+            tiquet1.Data =DateTime.Parse("01/01/2023");
+            tiquet1.Client = woodfriend1;
+
+            TiquetVenta tiquet2= new TiquetVenta();
+            tiquet2.Numero = 0002;
+            tiquet2.Data = DateTime.Parse("02/01/2023");
+            tiquet2.Client = client1;
+
+            TiquetVenta tiquet3 = new TiquetVenta();
+            tiquet3.Numero = 0003;
+            tiquet3.Data = DateTime.Parse("03/01/2023");
+            tiquet3.Client = woodfriend2;
+
+            TiquetVenta tiquet4 = new TiquetVenta();
+            tiquet4.Numero = 0004;
+            tiquet4.Data = DateTime.Parse("01/02/2023");
+            tiquet4.Client = professional1;
+
+            TiquetVenta tiquet5 = new TiquetVenta();
+            tiquet5.Numero = 0005;
+            tiquet5.Data = DateTime.Parse("01/02/2023");
+            tiquet5.Client = professional2;
+
+            TiquetVenta tiquet6 = new TiquetVenta();
+            tiquet6.Numero = 0006;
+            tiquet6.Data = DateTime.Parse("21/02/2023");
+            tiquet6.Client = professional3;
+
+
+            badalona.AddTiquet(tiquet1);
+            badalona.AddTiquet(tiquet2);
+            barcelona.AddTiquet(tiquet3);
+            barcelona.AddTiquet(tiquet4);
+            girona.AddTiquet(tiquet5);
+            girona.AddTiquet(tiquet6);
+
+            tiquet1.AddLineatiquet(linea1);
+            tiquet1.AddLineatiquet(linea2);
+            tiquet2.AddLineatiquet(linea4);
+            tiquet2.AddLineatiquet(linea3);
+            tiquet3.AddLineatiquet(linea5);
+            tiquet4 .AddLineatiquet(linea6);
+            tiquet5.AddLineatiquet(linea7);
+            tiquet6.AddLineatiquet(linea8);
+
+
+
+            Console.WriteLine();
         }
         void StockTenda(WoodShops woodShops)
         {
@@ -306,7 +398,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 }
             }
         }
-
         void LlistatClients(WoodShops woodShops)
         {
             //Mostrar listado de todos los clientes,
@@ -567,7 +658,6 @@ namespace _20230206_Exercici_Objectes_Woodshop
                 Console.WriteLine();
             }
         }
-
         void BuscaTiquet(WoodShops woodShops)
         {
             //Mostrar un listado de resumen de tickets en la tienda, se debe filtrar entre una fecha de inicio y
@@ -578,6 +668,7 @@ namespace _20230206_Exercici_Objectes_Woodshop
             DateTime dataFinal;
             int tenda;
             Tenda AuxTenda = null;
+            //TiquetVenta tiquetVenta1 = new TiquetVenta();
 
 
             Console.WriteLine();
@@ -607,12 +698,40 @@ namespace _20230206_Exercici_Objectes_Woodshop
             Console.Write("Introdueix data final: dd/mm//aaaa ");
             dataFinal = DateTime.Parse(Console.ReadLine());
 
-
-
-
             foreach (TiquetVenta ticket in AuxTenda.ArrayTiquetventa)
             {
+                if(ticket.Data > dataInici & ticket.Data < dataFinal)
+                    {
+                    float pvpTotal = 0;
 
+                    foreach (LineaTiquet linea in ticket.ArrayLineatiquets)
+                    {
+                        float pvplinea = 0;
+
+                        Console.WriteLine();
+                        Console.WriteLine("Tiquet nº: " + ticket.Numero);
+                        Console.WriteLine("Tiquet data: " + ticket.Data.ToShortDateString());//Data sense hora
+
+                        if (ticket.Client is Professional)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine(ticket.Client);                            
+                            pvplinea = linea.Producte.Pvp  * linea.Quantitat;
+                            pvpTotal += pvplinea;
+                            Console.WriteLine("Preu Total: " + pvpTotal + " Euros");
+                        }
+                        else  
+                        {
+                            Console.WriteLine(ticket.Client);
+                            pvplinea = linea.Producte.Pvp * linea.Quantitat;
+                            pvpTotal += pvplinea;
+                            Console.WriteLine("Preu Total: " + pvpTotal + " Euros");
+                        }
+                        
+                    }
+                    Console.WriteLine("");
+                }
+                Console.WriteLine();
             }
         }
     }
